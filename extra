@@ -1,0 +1,66 @@
+def update(choice):
+    my_cursor = mydb.cursor()
+    format.star("UPDATE INFORMATION", 3)
+
+    if choice == 1:
+        print("xoxo")
+    elif choice == 2:
+        # ADMIN
+        choice2 = int(input("\n>>>ADMIN FILTER<<<"
+                            "\n1. Update Employees\n2. Update Departments\n3. Go back\n"))
+
+
+
+
+
+
+    sql = 'select name from employee where emp_id=%s'
+    my_cursor.execute(sql, (id,))
+    record = my_cursor.fetchall()
+    r = my_cursor.rowcount
+
+    if r >= 1:
+        print("Employee already exists in the database!")
+        time.sleep(2)
+        x = int(input("\n>>Choose an option:\n1. Retry Input\n2. Go back\n"))
+        if x == 1:
+            add_employee()
+        else:
+            admin_menu()
+
+
+ def assets(choice):
+    my_cursor = mydb.cursor()
+    format.star("Organisation Assets", 3)
+
+    if choice==1:
+        print("USER")
+    elif choice==2:
+        print(">>Create New Asset<<\nTo input data into organisation's assets database\n")
+        id = int(input("1. Enter Asset ID: "))
+        emp_id = int(input("Enter allotted employee's ID: "))
+
+        if not check_user(emp_id):
+            print("Employee does not exist in the database!")
+            time.sleep(2)
+            admin_menu()
+
+
+
+        else:
+            name = input("Enter Employee Name: ")
+            job_title = input("Enter Employee Job Title: ")
+            gender = input("Enter Employee's gender: ")
+            age = int(input("Enter Employee's age: "))
+            add = input("Enter Employee's address : ")
+            mail = input("Enter Employee's email address : ")
+            phone = input("Enter Employee's phone number : ")
+
+            sql2 = 'insert into employee values(%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+
+            inp_data = (id, name, job_title, gender, age, add, mail, phone, dept_id)
+            my_cursor.execute(sql2, inp_data)
+
+            print("\nEmployee details added Successfully!!")
+            time.sleep(2)
+            admin_menu()
